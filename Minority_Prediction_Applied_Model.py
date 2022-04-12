@@ -12,26 +12,25 @@ from keras.models import model_from_json
 
 df = pd.read_csv("Minority_Prediction_Blanks.csv", delimiter=',', header = 0)
 
-X = df.drop(['loannumber', 'dateapproved', 'Size', 'minority'], axis=1)
-
-df = df.reset_index()
-
 L_Encode = LabelEncoder()
+#df['quality'] = L_Encode.fit_transform(df['quality'])
+
+df['forgivenessamount'] = df['forgivenessamount'].fillna(df['forgivenessamount'].median())
+#print(df['forgivenessamount'].isna().sum())
+#print(df['currentapprovalamount'].isna().sum())
+
+Y = df['minority']
+X = df.drop(['minority','loannumber', 'dateapproved', 'Size', 'Zip','Stalp'], axis=1)
+
+X = X.reset_index()
 
 #Use label encoder to convert categorical values into numeric values 
 X['NameFull'] = L_Encode.fit_transform(X['NameFull'])
 X['City'] = L_Encode.fit_transform(X['City'])
-X['Stalp'] = L_Encode.fit_transform(X['Stalp'])
-X['Zip'] = L_Encode.fit_transform(X['Zip'])
 X['Stcnty'] = L_Encode.fit_transform(X['Stcnty'])
 X['CB'] = L_Encode.fit_transform(X['CB'])
 X['Asset'] = L_Encode.fit_transform(X['Asset'])
 X['HCAsset'] = L_Encode.fit_transform(X['HCAsset'])
-X['LoanToAsset'] = L_Encode.fit_transform(X['LoanToAsset'])
-X['CoreRatio'] = L_Encode.fit_transform(X['CoreRatio'])
-X['Office_Count'] = L_Encode.fit_transform(X['Office_Count'])
-X['Unique_Metros'] = L_Encode.fit_transform(X['Unique_Metros'])
-X['State_Count'] = L_Encode.fit_transform(X['State_Count'])
 X['borrowercity'] = L_Encode.fit_transform(X['borrowercity'])
 X['borrowerstate'] = L_Encode.fit_transform(X['borrowerstate'])
 X['originatinglender'] = L_Encode.fit_transform(X['originatinglender'])
@@ -40,9 +39,7 @@ X['originatinglenderstate'] = L_Encode.fit_transform(X['originatinglenderstate']
 X['naicscode'] = L_Encode.fit_transform(X['naicscode'])
 X['ruralurbanindicator'] = L_Encode.fit_transform(X['ruralurbanindicator'])
 X['lmiindicator'] = L_Encode.fit_transform(X['lmiindicator'])
-X['currentapprovalamount'] = L_Encode.fit_transform(X['currentapprovalamount'])
-X['jobsreported'] = L_Encode.fit_transform(X['jobsreported'])
-X['forgivenessamount'] = L_Encode.fit_transform(X['forgivenessamount'])
+X['FintechPartnership'] = L_Encode.fit_transform(X['FintechPartnership'])
 
 
 

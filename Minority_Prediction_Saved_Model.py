@@ -41,7 +41,7 @@ from keras.models import model_from_json
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Parameters Section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-num_epochs = 50
+num_epochs = 25
 batch_size = 250
 #num_nodes = [2500, 2000, 1500, 1000, 500]
 #num_layers = [5, 6]
@@ -89,29 +89,22 @@ print(df.shape)
 L_Encode = LabelEncoder()
 #df['quality'] = L_Encode.fit_transform(df['quality'])
 
-Y = df['minority']
-X = df.drop(['minority','loannumber', 'dateapproved', 'Size'], axis=1)
+df['forgivenessamount'] = df['forgivenessamount'].fillna(df['forgivenessamount'].median())
+#print(df['forgivenessamount'].isna().sum())
+#print(df['currentapprovalamount'].isna().sum())
 
-df = df.reset_index()
+Y = df['minority']
+X = df.drop(['minority','loannumber', 'dateapproved', 'Size', 'Zip','Stalp'], axis=1)
+
+X = X.reset_index()
 
 #Use label encoder to convert categorical values into numeric values 
-#X['originatinglenderlocationid'] = L_Encode.fit_transform(X['originatinglenderlocationid'])
-#X['CERT'] = L_Encode.fit_transform(X['CERT'])
-#X['CB'] = L_Encode.fit_transform(X['CB'])
 X['NameFull'] = L_Encode.fit_transform(X['NameFull'])
 X['City'] = L_Encode.fit_transform(X['City'])
-X['Stalp'] = L_Encode.fit_transform(X['Stalp'])
-X['Zip'] = L_Encode.fit_transform(X['Zip'])
 X['Stcnty'] = L_Encode.fit_transform(X['Stcnty'])
-#X['Size'] = L_Encode.fit_transform(X['Size'])
 X['CB'] = L_Encode.fit_transform(X['CB'])
 X['Asset'] = L_Encode.fit_transform(X['Asset'])
 X['HCAsset'] = L_Encode.fit_transform(X['HCAsset'])
-X['LoanToAsset'] = L_Encode.fit_transform(X['LoanToAsset'])
-X['CoreRatio'] = L_Encode.fit_transform(X['CoreRatio'])
-X['Office_Count'] = L_Encode.fit_transform(X['Office_Count'])
-X['Unique_Metros'] = L_Encode.fit_transform(X['Unique_Metros'])
-X['State_Count'] = L_Encode.fit_transform(X['State_Count'])
 X['borrowercity'] = L_Encode.fit_transform(X['borrowercity'])
 X['borrowerstate'] = L_Encode.fit_transform(X['borrowerstate'])
 X['originatinglender'] = L_Encode.fit_transform(X['originatinglender'])
@@ -120,16 +113,12 @@ X['originatinglenderstate'] = L_Encode.fit_transform(X['originatinglenderstate']
 X['naicscode'] = L_Encode.fit_transform(X['naicscode'])
 X['ruralurbanindicator'] = L_Encode.fit_transform(X['ruralurbanindicator'])
 X['lmiindicator'] = L_Encode.fit_transform(X['lmiindicator'])
-#X['NameFull'] = L_Encode.fit_transform(X['NameFull'])
-#X['Zip'] = L_Encode.fit_transform(X['Zip'])
-X['currentapprovalamount'] = L_Encode.fit_transform(X['currentapprovalamount'])
-X['jobsreported'] = L_Encode.fit_transform(X['jobsreported'])
-X['forgivenessamount'] = L_Encode.fit_transform(X['forgivenessamount'])
+X['FintechPartnership'] = L_Encode.fit_transform(X['FintechPartnership'])
 
 X.shape
 
 
-print(df.info)
+print(X.info)
 
 
 #Use StandardScaler
@@ -169,14 +158,15 @@ Final Model
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 activation_func = 'relu'
+#activation_func = 'sigmoid'
 start_time = datetime.datetime.now()
 model = Sequential()
-model.add(Dense(250, input_dim=trainX.shape[1], activation=activation_func))
-model.add(Dense(200,activation =activation_func, kernel_initializer='normal'))
-model.add(Dense(150,activation =activation_func, kernel_initializer='normal'))
-model.add(Dense(100,activation =activation_func, kernel_initializer='normal'))
-model.add(Dense(50,activation =activation_func, kernel_initializer='normal'))
-model.add(Dense(20,activation =activation_func, kernel_initializer='normal'))#try a smaller layer, maybe 200
+model.add(Dense(512, input_dim=trainX.shape[1], activation=activation_func))
+model.add(Dense(512,activation =activation_func, kernel_initializer='normal'))
+model.add(Dense(256,activation =activation_func, kernel_initializer='normal'))
+model.add(Dense(128,activation =activation_func, kernel_initializer='normal'))
+model.add(Dense(64,activation =activation_func, kernel_initializer='normal'))
+model.add(Dense(32,activation =activation_func, kernel_initializer='normal'))#try a smaller layer, maybe 200
 model.add(Dense(n_classes, activation='sigmoid'))
 opt = SGD(learning_rate=0.2, momentum=0.7)
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -201,6 +191,48 @@ print("Saved model to disk")
 # """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Print out results for final model 
 # """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+# Create a chart to display training and test accuracy by epoch   
+plt.figure(0)
+# Pull training accuracy history 
+plt.plot(history.history['accuracy'],'r')
+# Pull test accuracy history
+plt.plot(history.history['val_accuracy'],'g')
+# Assign number of ticks on the x-axis
+plt.xticks(np.arange(0, num_epochs+5, 2.0))
+# Define dimensions of the chart 
+plt.rcParams['figure.figsize'] = (8, 6)
+# Define label for x-axis 
+plt.xlabel("Num of Epochs")
+# Define label for y-axis 
+plt.ylabel("Accuracy")
+# Define title for chart
+plt.title("Training Accuracy vs Validation Accuracy")
+# Define label for legend
+plt.legend(['train','validation'])
+ 
+
+# Create a chart to display training and test loss rates by epoch 
+plt.figure(1)
+# Pull training loss rate history
+plt.plot(history.history['loss'],'r')
+# Pull test loss rate history 
+plt.plot(history.history['val_loss'],'g')
+# Assign number of ticks on the x-axis 
+plt.xticks(np.arange(0, num_epochs+5, 2.0))
+# Define dimensions of the chart
+plt.rcParams['figure.figsize'] = (8, 6)
+# Define label for x-axis 
+plt.xlabel("Num of Epochs")
+# Define label for y-axis 
+plt.ylabel("Loss")
+# Define title for chart
+plt.title("Training Loss vs Validation Loss")
+# Define label for legend
+plt.legend(['train','validation'])
+#Show plots
+plt.show()
+
 
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
@@ -232,6 +264,7 @@ def plot_confusion_matrix(cm, classes,
     plt.xlabel('Predicted label')
 
 
+
 # Predict the values from the validation dataset
 pred_label = model.predict(testX)
 # Convert predictions classes to one hot vectors 
@@ -243,6 +276,10 @@ confusion_mtx = confusion_matrix(label_true, pred_label_classes)
 print(confusion_mtx)
 # plot the confusion matrix
 plot_confusion_matrix(confusion_mtx, classes = range(testY.shape[1])) 
+
+
+
+
 
 stop_time = datetime.datetime.now()
 print ("Time required for training:",stop_time - start_time)
