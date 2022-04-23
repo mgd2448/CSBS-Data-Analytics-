@@ -1,0 +1,1766 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2021.4">
+  <Nodes>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Union.Union">
+        <Position x="1158" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ByName_ErrorMode>Warning</ByName_ErrorMode>
+          <ByName_OutputMode>All</ByName_OutputMode>
+          <Mode>ByName</Mode>
+          <SetOutputOrder value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Combine data with newly filled in minority column back into the original dataset ]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Combine data with newly filled in minority column back into the original dataset ]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnion" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="1230" y="438" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\FDIC Unbanked Data by State\Combined_State_Data.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Read in unbanked data by state ]]></AnnotationText>
+          <DefaultAnnotationText>Combined_State_Data.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Number of Households (1000s)" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\FDIC Unbanked Data by State\Combined_State_Data.csv" type="V_String" />
+            <Field name="Unbanked" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\FDIC Unbanked Data by State\Combined_State_Data.csv" type="V_String" />
+            <Field name="Has bank account" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\FDIC Unbanked Data by State\Combined_State_Data.csv" type="V_String" />
+            <Field name="Unbanked (90 PCT CI)" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\FDIC Unbanked Data by State\Combined_State_Data.csv" type="V_String" />
+            <Field name="Has bank account (90 PCT CI)" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\FDIC Unbanked Data by State\Combined_State_Data.csv" type="V_String" />
+            <Field name="State" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\FDIC Unbanked Data by State\Combined_State_Data.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1590" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="Left([LoanToAsset], 5) &#xA;" field="LoanToAsset" size="254" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[
+]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[LoanToAsset = Left([LoanToAsset], 5) 
+
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1662" y="174" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="left([CoreRatio],5)" field="CoreRatio" size="254" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[
+]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[CoreRatio = left([CoreRatio],5)
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings>
+        <Position x="2754" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="estimation pct">70</Value>
+          <Value name="validation pct">30</Value>
+          <Value name="rand seed">1000</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Divide data into training and testing with 70% (training) and 30%(testing) split ]]></AnnotationText>
+          <DefaultAnnotationText>Divide data into training and testing with</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings Macro="Predictive Tools\Create_Samples.yxmc" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="2838" y="354" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="0">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Full_Model_Data.csv</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <LineEndStyle>CRLF</LineEndStyle>
+            <Delimeter>,</Delimeter>
+            <ForceQuotes>False</ForceQuotes>
+            <HeaderRow>True</HeaderRow>
+            <CodePage>28591</CodePage>
+            <WriteBOM>True</WriteBOM>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Read out all data to CSV ]]></AnnotationText>
+          <DefaultAnnotationText>Full_Model_Data.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1758" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="left([naicscode],2)" field="NaicsCode2" size="1073741823" type="V_WString" />
+            <FormulaField expression="IIF([ruralurbanindicator] == &quot;U&quot;, 1, 0)" field="ruralurbanindicator" size="254" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Take only the first two elements of each row in the NAICS column, and convert contents of ruralurbanindicator to (0,1)</AnnotationText>
+          <DefaultAnnotationText>NaicsCode2 = left([naicscode],2)
+ruralurbanindicator = IIF([ruralurbanindicator]...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="2106" y="294" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="CERT" action="GroupBy" rename="CERT" />
+            <SummarizeField field="Approval/Branch" action="Sum" rename="Sum_Approval/Branch" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Summarize the new efficiency ratio by CERT number</AnnotationText>
+          <DefaultAnnotationText>Summarize the new efficiency ratio by CERT number</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="2202" y="174" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="CERT" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="CERT" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="True" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_loannumber" selected="True" input="Left_" />
+                <SelectField field="Left_CERT" selected="True" input="Left_" />
+                <SelectField field="Left_NameFull" selected="True" input="Left_" />
+                <SelectField field="Left_City" selected="True" input="Left_" />
+                <SelectField field="Left_Stalp" selected="True" input="Left_" />
+                <SelectField field="Left_Zip" selected="True" input="Left_" />
+                <SelectField field="Left_Stcnty" selected="True" input="Left_" />
+                <SelectField field="Left_CB" selected="True" input="Left_" />
+                <SelectField field="Left_Asset" selected="True" input="Left_" />
+                <SelectField field="Left_HCAsset" selected="True" input="Left_" />
+                <SelectField field="Left_Size" selected="True" input="Left_" />
+                <SelectField field="Left_LoanToAsset" selected="True" input="Left_" />
+                <SelectField field="Left_CoreRatio" selected="True" input="Left_" />
+                <SelectField field="Left_Office_Count" selected="True" input="Left_" />
+                <SelectField field="Left_Unique_Metros" selected="True" input="Left_" />
+                <SelectField field="Left_State_Count" selected="True" input="Left_" />
+                <SelectField field="Left_dateapproved" selected="True" input="Left_" />
+                <SelectField field="Left_borrowercity" selected="True" input="Left_" />
+                <SelectField field="Left_borrowerstate" selected="True" input="Left_" />
+                <SelectField field="Left_originatinglender" selected="True" input="Left_" />
+                <SelectField field="Left_originatinglendercity" selected="True" input="Left_" />
+                <SelectField field="Left_originatinglenderstate" selected="True" input="Left_" />
+                <SelectField field="Left_naicscode" selected="True" input="Left_" />
+                <SelectField field="Left_ruralurbanindicator" selected="True" input="Left_" />
+                <SelectField field="Left_lmiindicator" selected="True" input="Left_" />
+                <SelectField field="Left_minority" selected="True" input="Left_" />
+                <SelectField field="Left_currentapprovalamount" selected="True" input="Left_" />
+                <SelectField field="Left_jobsreported" selected="True" input="Left_" />
+                <SelectField field="Left_forgivenessamount" selected="True" input="Left_" />
+                <SelectField field="Left_FintechPartnership" selected="True" input="Left_" />
+                <SelectField field="Left_Number of Households (1000s)" selected="True" input="Left_" />
+                <SelectField field="Left_Unbanked" selected="True" input="Left_" />
+                <SelectField field="Left_Has bank account" selected="True" input="Left_" />
+                <SelectField field="Left_Unbanked (90 PCT CI)" selected="True" input="Left_" />
+                <SelectField field="Left_Has bank account (90 PCT CI)" selected="True" input="Left_" />
+                <SelectField field="Left_Right_State" selected="True" input="Left_" />
+                <SelectField field="Left_NaicsCode2" selected="True" input="Left_" />
+                <SelectField field="Right_Sum_Approval/Branch" selected="True" input="Right_" />
+                <SelectField field="Right_NameFull" selected="False" rename="Right_NameFull" input="Right_" />
+                <SelectField field="Right_cert" selected="False" rename="Right_cert" input="Right_" />
+                <SelectField field="Right_cert" selected="False" rename="Right_cert" input="Right_" />
+                <SelectField field="Right_loannumber" selected="False" rename="Right_loannumber" input="Right_" />
+                <SelectField field="Left_State" selected="False" input="Left_" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Join original data with new summarized table of efficiency column by CERT ]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Join original data with new summarized table of efficiency column by CERT ]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="15">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1998" y="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[currentapprovalamount]/[Office_Count]&#xA;" field="Approval/Branch" size="4" type="Float" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Create new column with efficiency ratio of amount distributed over the number of branches
+]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Approval/Branch = [currentapprovalamount]/[Office_Count]
+
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="2610" y="354" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="cert" action="GroupBy" rename="cert" />
+            <SummarizeField field="Jobs/Branch" action="Sum" rename="Sum_Jobs/Branch" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Summarize second efficiency ratio by CERT number</AnnotationText>
+          <DefaultAnnotationText>Summarize second efficiency ratio by CERT number</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="2490" y="354" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[jobsreported]/[Office_Count]&#xA;" field="Jobs/Branch" size="4" type="Float" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Create second efficiency ratio by dividing the number of jobs by branches per CERT 
+]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Jobs/Branch = [jobsreported]/[Office_Count]
+
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="2586" y="174" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="cert" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="cert" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_cert" selected="True" rename="Right_cert" input="Right_" />
+                <SelectField field="Left_Right_cert" selected="True" rename="Left_Right_cert" input="Left_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Join original data with the second summarized table of efficiency column by CERT ]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Join original data with the second summarized table of efficiency column by CERT ]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="19">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="882" y="198" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Data with filled in minority column generated by CNN model ]]></AnnotationText>
+          <DefaultAnnotationText>Minority_Prediction_FilledIn.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="loannumber" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="CERT" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="NameFull" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="City" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="Stalp" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="Zip" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="Stcnty" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="CB" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="Asset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="HCAsset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="Size" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="LoanToAsset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="CoreRatio" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="Office_Count" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="Unique_Metros" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="State_Count" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="dateapproved" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="borrowercity" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="borrowerstate" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="originatinglender" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="originatinglendercity" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="originatinglenderstate" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="naicscode" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="ruralurbanindicator" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="lmiindicator" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="minority" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="currentapprovalamount" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="jobsreported" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="forgivenessamount" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+            <Field name="FintechPartnership" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_FilledIn.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="23">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1014" y="234" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="24">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1914" y="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Office_Count" selected="True" type="Int64" size="8" />
+            <SelectField field="currentapprovalamount" selected="True" type="Float" size="4" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="25">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1938" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="26">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="2382" y="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Office_Count" selected="True" type="Int64" size="8" />
+            <SelectField field="jobsreported" selected="True" type="Int64" size="8" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="27">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="2910" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="0">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Train_Model_Sample.csv</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <LineEndStyle>CRLF</LineEndStyle>
+            <Delimeter>,</Delimeter>
+            <ForceQuotes>False</ForceQuotes>
+            <HeaderRow>True</HeaderRow>
+            <CodePage>28591</CodePage>
+            <WriteBOM>True</WriteBOM>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Read out training data to CSV ]]></AnnotationText>
+          <DefaultAnnotationText>Train_Model_Sample.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+    <Node ToolID="28">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="2910" y="234" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="0">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Test_Model_Sample.csv</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <LineEndStyle>CRLF</LineEndStyle>
+            <Delimeter>,</Delimeter>
+            <ForceQuotes>False</ForceQuotes>
+            <HeaderRow>True</HeaderRow>
+            <CodePage>28591</CodePage>
+            <WriteBOM>True</WriteBOM>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Read out testing data to CSV ]]></AnnotationText>
+          <DefaultAnnotationText>Test_Model_Sample.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+    <Node ToolID="29">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1218" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Stalp" selected="True" rename="State" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="30">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="1422" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="State" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="State" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_State" selected="True" rename="Right_State" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Join data with new unbanked data from the FDIC</AnnotationText>
+          <DefaultAnnotationText>Join data with new unbanked data from the FDIC</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="31">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="1410" y="174" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="State" action="CountDistinct" rename="CountDistinct_State" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="32">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1314" y="414" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="33">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Unique.Unique">
+        <Position x="1290" y="222" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UniqueFields>
+            <Field field="loannumber" />
+          </UniqueFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Validate that there are no duplicates after union</AnnotationText>
+          <DefaultAnnotationText>Validate that there are no duplicates after union</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnique" />
+    </Node>
+    <Node ToolID="34">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Unique.Unique">
+        <Position x="978" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UniqueFields>
+            <Field field="loannumber" />
+          </UniqueFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Validate that there are no duplicates ]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Validate that there are no duplicates ]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnique" />
+    </Node>
+    <Node ToolID="36">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="174" y="474" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>CB</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2022-04-11 11:58:35</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>0</Operand>
+              <StartDate>2022-04-11 11:58:35</StartDate>
+              <EndDate>2022-04-11 11:58:35</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Filter out community banks ]]></AnnotationText>
+          <DefaultAnnotationText>[CB] = "0"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="37">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="54" y="462" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Read in community bank reference data ]]></AnnotationText>
+          <DefaultAnnotationText>current-community-banking-reference-data.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Id" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="NameHCR" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="RSSDHCR" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Specialty" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Foreign" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Nocore" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Noloans" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Credit" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="CERT" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="NameFull" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Address" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="City" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Stalp" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Zip" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Stcnty" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Year" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Callym" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="CB" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Asset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="HCAsset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Size" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="ForAsset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="LoanToAsset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="CoreRatio" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Max_Deposits" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Office_Count" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Unique_Metros" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="State_Count" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Business_Line" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_LTA" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_Core" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_Deposits" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_Offices" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_LrgMSA" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_States" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Run_Date" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="38">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="546" y="366" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="cert" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="CERT" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="True" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_loannumber" selected="True" rename="Left_loannumber" input="Left_" />
+                <SelectField field="Left_originatinglenderlocationid" selected="True" rename="Left_originatinglenderlocationid" input="Left_" />
+                <SelectField field="Left_cert" selected="True" rename="Left_cert" input="Left_" />
+                <SelectField field="Left_cb" selected="True" rename="Left_cb" input="Left_" />
+                <SelectField field="Left_stchrtr" selected="True" rename="Left_stchrtr" input="Left_" />
+                <SelectField field="Left_dateapproved" selected="True" rename="Left_dateapproved" input="Left_" />
+                <SelectField field="Left_borrowername" selected="True" rename="Left_borrowername" input="Left_" />
+                <SelectField field="Left_borrowercity" selected="True" rename="Left_borrowercity" input="Left_" />
+                <SelectField field="Left_borrowerstate" selected="True" rename="Left_borrowerstate" input="Left_" />
+                <SelectField field="Left_originatinglender" selected="True" rename="Left_originatinglender" input="Left_" />
+                <SelectField field="Left_originatinglendercity" selected="True" rename="Left_originatinglendercity" input="Left_" />
+                <SelectField field="Left_originatinglenderstate" selected="True" rename="Left_originatinglenderstate" input="Left_" />
+                <SelectField field="Left_naicscode" selected="True" input="Left_" />
+                <SelectField field="Left_ruralurbanindicator" selected="True" rename="Left_ruralurbanindicator" input="Left_" />
+                <SelectField field="Left_lmiindicator" selected="True" rename="Left_lmiindicator" input="Left_" />
+                <SelectField field="Left_minority" selected="True" rename="Left_minority" input="Left_" />
+                <SelectField field="Left_currentapprovalamount" selected="True" input="Left_" />
+                <SelectField field="Left_jobsreported" selected="True" input="Left_" />
+                <SelectField field="Left_forgivenessamount" selected="True" rename="Left_forgivenessamount" input="Left_" />
+                <SelectField field="Right_Id" selected="True" input="Right_" />
+                <SelectField field="Right_NameHCR" selected="True" input="Right_" />
+                <SelectField field="Right_RSSDHCR" selected="True" input="Right_" />
+                <SelectField field="Right_Excl_Specialty" selected="True" input="Right_" />
+                <SelectField field="Right_Excl_Foreign" selected="True" input="Right_" />
+                <SelectField field="Right_Excl_Nocore" selected="True" input="Right_" />
+                <SelectField field="Right_Excl_Noloans" selected="True" input="Right_" />
+                <SelectField field="Right_Excl_Credit" selected="True" input="Right_" />
+                <SelectField field="Right_CERT" selected="True" rename="Right_CERT" input="Right_" />
+                <SelectField field="Right_NameFull" selected="True" input="Right_" />
+                <SelectField field="Right_Address" selected="True" input="Right_" />
+                <SelectField field="Right_City" selected="True" input="Right_" />
+                <SelectField field="Right_Stalp" selected="True" input="Right_" />
+                <SelectField field="Right_Zip" selected="True" input="Right_" />
+                <SelectField field="Right_Stcnty" selected="True" input="Right_" />
+                <SelectField field="Right_Year" selected="True" input="Right_" />
+                <SelectField field="Right_Callym" selected="True" input="Right_" />
+                <SelectField field="Right_CB" selected="True" rename="Right_CB" input="Right_" />
+                <SelectField field="Right_Asset" selected="True" input="Right_" />
+                <SelectField field="Right_HCAsset" selected="True" input="Right_" />
+                <SelectField field="Right_Size" selected="True" input="Right_" />
+                <SelectField field="Right_ForAsset" selected="True" input="Right_" />
+                <SelectField field="Right_LoanToAsset" selected="True" input="Right_" />
+                <SelectField field="Right_CoreRatio" selected="True" input="Right_" />
+                <SelectField field="Right_Max_Deposits" selected="True" input="Right_" />
+                <SelectField field="Right_Office_Count" selected="True" input="Right_" />
+                <SelectField field="Right_Unique_Metros" selected="True" input="Right_" />
+                <SelectField field="Right_State_Count" selected="True" input="Right_" />
+                <SelectField field="Right_Business_Line" selected="True" input="Right_" />
+                <SelectField field="Right_Meets_LTA" selected="True" input="Right_" />
+                <SelectField field="Right_Meets_Core" selected="True" input="Right_" />
+                <SelectField field="Right_Meets_Deposits" selected="True" input="Right_" />
+                <SelectField field="Right_Meets_Offices" selected="True" input="Right_" />
+                <SelectField field="Right_Meets_LrgMSA" selected="True" input="Right_" />
+                <SelectField field="Right_Meets_States" selected="True" input="Right_" />
+                <SelectField field="Right_Run_Date" selected="True" input="Right_" />
+                <SelectField field="Left_NaisCode" selected="True" input="Left_" />
+                <SelectField field="Left_CurrentApprovalAmountJobsReported" selected="True" input="Left_" />
+                <SelectField field="Left_test" selected="True" input="Left_" />
+                <SelectField field="*Unknown" selected="True" />
+                <SelectField field="Left_Fintech Partnership " selected="True" input="Left_" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Join community bank reference and PPP loan data ]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Join community bank reference and PPP loan data ]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="39">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="246" y="282" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="if [cert] = &quot;35214&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;13297&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;19690&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;23030&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;58728&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;34444&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;58410&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;34627&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;34403&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;4084&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;58090&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;35599&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;31189&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;18561&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;34403&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;57184&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;9423&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;6976&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;12923&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;32245&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;32773&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;4063&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;27334&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;58490&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;6892&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;59154&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;30394&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;57056&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;58410&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;1058&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;35546&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;26962&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;11492&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;57825&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;19772&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;57882&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;3864&quot; THEN &quot;1&quot; &#xA;elseif [cert] = &quot;57665&quot; THEN &quot;1&quot;&#xA;elseif [cert] = &quot;34997&quot; THEN &quot;1&quot;&#xA;elseif [cert] = &quot;34781&quot; THEN &quot;1&quot;&#xA;elseif [cert] = &quot;28368&quot; THEN &quot;1&quot;&#xA;ELSE 0 ENDIF" field="Fintech Partnership " size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Compare loans distributed to a list of 41 FDIC certification numbers from banks that had fintech partnerships ]]></AnnotationText>
+          <DefaultAnnotationText>Fintech Partnership  = if [cert] = "35214" THEN "1" 
+elseif [cert] = "13297" THE...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="40">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="426" y="282" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field><![CDATA[Fintech Partnership ]]></Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2022-03-25 09:59:51</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>1</Operand>
+              <StartDate>2022-03-25 09:59:51</StartDate>
+              <EndDate>2022-03-25 09:59:51</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Filter on new fintech partnership column ]]></AnnotationText>
+          <DefaultAnnotationText>[Fintech Partnership ] = "1"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="41">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="198" y="114" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>CB</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2022-04-11 12:06:00</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>1</Operand>
+              <StartDate>2022-04-11 12:06:00</StartDate>
+              <EndDate>2022-04-11 12:06:00</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Filter out non-community banks ]]></AnnotationText>
+          <DefaultAnnotationText>[CB] = "1"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="42">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="78" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Read in community bank reference data ]]></AnnotationText>
+          <DefaultAnnotationText>current-community-banking-reference-data.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Id" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="NameHCR" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="RSSDHCR" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Specialty" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Foreign" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Nocore" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Noloans" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Excl_Credit" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="CERT" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="NameFull" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Address" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="City" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Stalp" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Zip" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Stcnty" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Year" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Callym" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="CB" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Asset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="HCAsset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Size" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="ForAsset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="LoanToAsset" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="CoreRatio" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Max_Deposits" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Office_Count" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Unique_Metros" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="State_Count" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Business_Line" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_LTA" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_Core" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_Deposits" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_Offices" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_LrgMSA" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Meets_States" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+            <Field name="Run_Date" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\current-community-banking-reference-data.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="43">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="522" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="CERT" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="cert" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_cert" selected="True" rename="Right_cert" input="Right_" />
+                <SelectField field="Right_cb" selected="True" rename="Right_cb" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Join community bank reference and PPP loan data ]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Join community bank reference and PPP loan data ]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="44">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="690" y="198" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>IsNotNull</Operator>
+            <Field>minority</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2022-04-03 13:50:40</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>
+              </Operand>
+              <StartDate>2022-04-03 13:50:40</StartDate>
+              <EndDate>2022-04-03 13:50:40</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Filter out rows where the minority column equals NA</AnnotationText>
+          <DefaultAnnotationText>!IsNull([minority])</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="45">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="750" y="510" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>IsNotNull</Operator>
+            <Field>minority</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2022-04-11 14:15:56</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <Operand>
+              </Operand>
+              <StartDate>2022-04-11 14:15:56</StartDate>
+              <EndDate>2022-04-11 14:15:56</EndDate>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Filter out rows where the minority column equals NA</AnnotationText>
+          <DefaultAnnotationText>!IsNull([minority])</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="46">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="606" y="198" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="True" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="loannumber" selected="True" />
+            <SelectField field="Id" selected="False" />
+            <SelectField field="NameHCR" selected="True" />
+            <SelectField field="RSSDHCR" selected="False" />
+            <SelectField field="Excl_Specialty" selected="False" />
+            <SelectField field="Excl_Foreign" selected="False" />
+            <SelectField field="Excl_Nocore" selected="False" />
+            <SelectField field="Excl_Noloans" selected="False" />
+            <SelectField field="Excl_Credit" selected="False" />
+            <SelectField field="CERT" selected="True" />
+            <SelectField field="NameFull" selected="True" />
+            <SelectField field="Address" selected="True" />
+            <SelectField field="City" selected="True" />
+            <SelectField field="Stalp" selected="True" />
+            <SelectField field="Zip" selected="True" />
+            <SelectField field="Stcnty" selected="True" />
+            <SelectField field="Year" selected="True" />
+            <SelectField field="Callym" selected="True" />
+            <SelectField field="CB" selected="True" />
+            <SelectField field="Asset" selected="True" />
+            <SelectField field="HCAsset" selected="True" />
+            <SelectField field="Size" selected="True" />
+            <SelectField field="ForAsset" selected="True" />
+            <SelectField field="LoanToAsset" selected="True" />
+            <SelectField field="CoreRatio" selected="True" />
+            <SelectField field="Max_Deposits" selected="True" />
+            <SelectField field="Office_Count" selected="True" />
+            <SelectField field="Unique_Metros" selected="True" />
+            <SelectField field="State_Count" selected="True" />
+            <SelectField field="Business_Line" selected="True" />
+            <SelectField field="Meets_LTA" selected="False" />
+            <SelectField field="Meets_Core" selected="False" />
+            <SelectField field="Meets_Deposits" selected="False" />
+            <SelectField field="Meets_Offices" selected="False" />
+            <SelectField field="Meets_LrgMSA" selected="False" />
+            <SelectField field="Meets_States" selected="False" />
+            <SelectField field="Run_Date" selected="False" />
+            <SelectField field="originatinglenderlocationid" selected="False" />
+            <SelectField field="Right_cert" selected="False" />
+            <SelectField field="Right_cb" selected="True" />
+            <SelectField field="stchrtr" selected="True" />
+            <SelectField field="dateapproved" selected="True" />
+            <SelectField field="borrowername" selected="True" />
+            <SelectField field="borrowercity" selected="True" />
+            <SelectField field="borrowerstate" selected="True" />
+            <SelectField field="originatinglender" selected="True" />
+            <SelectField field="originatinglendercity" selected="True" />
+            <SelectField field="originatinglenderstate" selected="True" />
+            <SelectField field="naicscode" selected="True" />
+            <SelectField field="ruralurbanindicator" selected="True" />
+            <SelectField field="lmiindicator" selected="True" />
+            <SelectField field="minority" selected="True" />
+            <SelectField field="currentapprovalamount" selected="True" />
+            <SelectField field="jobsreported" selected="True" />
+            <SelectField field="forgivenessamount" selected="True" />
+            <SelectField field="Fintech Partnership " selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="47">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="666" y="522" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="True" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="naicscode" selected="True" />
+            <SelectField field="Left_minority" selected="True" rename="minority" />
+            <SelectField field="currentapprovalamount" selected="True" type="Float" size="4" />
+            <SelectField field="jobsreported" selected="True" type="Int64" size="8" />
+            <SelectField field="NameHCR" selected="False" />
+            <SelectField field="NameFull" selected="True" />
+            <SelectField field="Address" selected="False" />
+            <SelectField field="City" selected="True" />
+            <SelectField field="Stalp" selected="True" />
+            <SelectField field="Zip" selected="True" />
+            <SelectField field="Stcnty" selected="True" />
+            <SelectField field="Year" selected="False" />
+            <SelectField field="Callym" selected="False" />
+            <SelectField field="Right_CB" selected="False" />
+            <SelectField field="Asset" selected="True" type="Int64" size="8" />
+            <SelectField field="HCAsset" selected="True" type="Int64" size="8" />
+            <SelectField field="Size" selected="False" />
+            <SelectField field="ForAsset" selected="False" />
+            <SelectField field="LoanToAsset" selected="True" type="Float" size="4" />
+            <SelectField field="CoreRatio" selected="True" type="Float" size="4" />
+            <SelectField field="Max_Deposits" selected="False" />
+            <SelectField field="Office_Count" selected="True" type="Int64" size="8" />
+            <SelectField field="Unique_Metros" selected="True" type="Int64" size="8" />
+            <SelectField field="State_Count" selected="True" type="Int64" size="8" />
+            <SelectField field="Business_Line" selected="True" />
+            <SelectField field="Left_loannumber" selected="True" rename="loannumber" />
+            <SelectField field="Left_originatinglenderlocationid" selected="True" rename="originatinglenderlocationid" />
+            <SelectField field="Left_cert" selected="True" rename="cert" />
+            <SelectField field="Left_cb" selected="True" rename="cb" />
+            <SelectField field="Left_stchrtr" selected="False" />
+            <SelectField field="Left_dateapproved" selected="True" rename="dateapproved" />
+            <SelectField field="Left_borrowername" selected="False" />
+            <SelectField field="Left_borrowercity" selected="True" rename="borrowercity" />
+            <SelectField field="Left_borrowerstate" selected="True" rename="borrowerstate" />
+            <SelectField field="Left_originatinglender" selected="True" rename="originatinglender" />
+            <SelectField field="Left_originatinglendercity" selected="True" rename="originatinglendercity" />
+            <SelectField field="Left_originatinglenderstate" selected="True" rename="originatinglenderstate" />
+            <SelectField field="Left_ruralurbanindicator" selected="True" rename="ruralurbanindicator" />
+            <SelectField field="Left_lmiindicator" selected="True" rename="lmiindicator" />
+            <SelectField field="Left_forgivenessamount" selected="True" rename="forgivenessamount" />
+            <SelectField field="Fintech Partnership " selected="True" type="V_String" size="1073741823" />
+            <SelectField field="Id" selected="False" />
+            <SelectField field="RSSDHCR" selected="False" />
+            <SelectField field="Excl_Specialty" selected="False" />
+            <SelectField field="Excl_Foreign" selected="False" />
+            <SelectField field="Excl_Nocore" selected="False" />
+            <SelectField field="Excl_Noloans" selected="False" />
+            <SelectField field="Excl_Credit" selected="False" />
+            <SelectField field="Right_CERT" selected="False" />
+            <SelectField field="Meets_LTA" selected="False" />
+            <SelectField field="Meets_Core" selected="False" />
+            <SelectField field="Meets_Deposits" selected="False" />
+            <SelectField field="Meets_Offices" selected="False" />
+            <SelectField field="Meets_LrgMSA" selected="False" />
+            <SelectField field="Meets_States" selected="False" />
+            <SelectField field="Run_Date" selected="False" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="48">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="102" y="282" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>|</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Read in PPP loan-level data  ]]></AnnotationText>
+          <DefaultAnnotationText>ppp_loan_level_220102.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="loannumber" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="originatinglenderlocationid" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="cert" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="cb" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="stchrtr" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="dateapproved" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="borrowername" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="borrowercity" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="borrowerstate" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="originatinglender" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="originatinglendercity" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="originatinglenderstate" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="naicscode" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="ruralurbanindicator" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="lmiindicator" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="minority" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="currentapprovalamount" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="jobsreported" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+            <Field name="forgivenessamount" size="254" source="File: C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\first_draw_ppp_loan_level_220102.csv (2)\ppp_loan_level_220102.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="49">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="846" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="0">C:\Users\thepw\OneDrive\Documents\School\Competitions\Data\Minority Prediction\Minority_Prediction_Blanks.csv</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <LineEndStyle>CRLF</LineEndStyle>
+            <Delimeter>,</Delimeter>
+            <ForceQuotes>False</ForceQuotes>
+            <HeaderRow>True</HeaderRow>
+            <CodePage>28591</CodePage>
+            <WriteBOM>True</WriteBOM>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>List of loans that need the minority column populated</AnnotationText>
+          <DefaultAnnotationText>Minority_Prediction_Blanks.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+    <Node ToolID="51">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Union.Union">
+        <Position x="918" y="462" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ByName_ErrorMode>Warning</ByName_ErrorMode>
+          <ByName_OutputMode>All</ByName_OutputMode>
+          <Mode>ByName</Mode>
+          <SetOutputOrder value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Join data on loans distributed by community bank and non-community banks where minority column is filled in ]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Join data on loans distributed by community bank and non-community banks where minority column is filled in ]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnion" />
+    </Node>
+    <Node ToolID="52">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="990" y="414" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="loannumber" selected="True" />
+            <SelectField field="CERT" selected="True" />
+            <SelectField field="NameFull" selected="True" />
+            <SelectField field="City" selected="True" />
+            <SelectField field="Stalp" selected="True" />
+            <SelectField field="Zip" selected="True" />
+            <SelectField field="Stcnty" selected="True" />
+            <SelectField field="CB" selected="True" />
+            <SelectField field="Asset" selected="True" type="Int64" size="8" />
+            <SelectField field="HCAsset" selected="True" type="Int64" size="8" />
+            <SelectField field="Size" selected="True" />
+            <SelectField field="LoanToAsset" selected="True" type="Float" size="4" />
+            <SelectField field="CoreRatio" selected="True" type="Float" size="4" />
+            <SelectField field="Office_Count" selected="True" type="Int64" size="8" />
+            <SelectField field="Unique_Metros" selected="True" type="Int64" size="8" />
+            <SelectField field="State_Count" selected="True" type="Int64" size="8" />
+            <SelectField field="dateapproved" selected="True" type="Date" size="10" />
+            <SelectField field="borrowercity" selected="True" />
+            <SelectField field="borrowerstate" selected="True" />
+            <SelectField field="originatinglender" selected="True" />
+            <SelectField field="originatinglendercity" selected="True" />
+            <SelectField field="originatinglenderstate" selected="True" />
+            <SelectField field="naicscode" selected="True" />
+            <SelectField field="ruralurbanindicator" selected="True" />
+            <SelectField field="lmiindicator" selected="True" />
+            <SelectField field="minority" selected="True" />
+            <SelectField field="currentapprovalamount" selected="True" type="Float" size="4" />
+            <SelectField field="jobsreported" selected="True" type="Int64" size="8" />
+            <SelectField field="forgivenessamount" selected="True" type="Float" size="4" />
+            <SelectField field="Fintech Partnership " selected="True" rename="FintechPartnership" type="V_String" size="1073741823" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="53">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Unique.Unique">
+        <Position x="1074" y="414" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UniqueFields>
+            <Field field="loannumber" />
+          </UniqueFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Validate that there are no duplicates after union</AnnotationText>
+          <DefaultAnnotationText>Validate that there are no duplicates after union</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnique" />
+    </Node>
+    <Node ToolID="54">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="726" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="loannumber" selected="True" />
+            <SelectField field="CERT" selected="True" />
+            <SelectField field="NameFull" selected="True" />
+            <SelectField field="City" selected="True" />
+            <SelectField field="Stalp" selected="True" />
+            <SelectField field="Zip" selected="True" />
+            <SelectField field="Stcnty" selected="True" />
+            <SelectField field="CB" selected="True" />
+            <SelectField field="Asset" selected="True" type="Int64" size="8" />
+            <SelectField field="HCAsset" selected="True" type="Int64" size="8" />
+            <SelectField field="Size" selected="True" />
+            <SelectField field="LoanToAsset" selected="True" type="Float" size="4" />
+            <SelectField field="CoreRatio" selected="True" type="Float" size="4" />
+            <SelectField field="Office_Count" selected="True" type="Int64" size="8" />
+            <SelectField field="Unique_Metros" selected="True" type="Int64" size="8" />
+            <SelectField field="State_Count" selected="True" type="Int64" size="8" />
+            <SelectField field="dateapproved" selected="True" type="Date" size="10" />
+            <SelectField field="borrowercity" selected="True" />
+            <SelectField field="borrowerstate" selected="True" />
+            <SelectField field="originatinglender" selected="True" />
+            <SelectField field="originatinglendercity" selected="True" />
+            <SelectField field="originatinglenderstate" selected="True" />
+            <SelectField field="naicscode" selected="True" />
+            <SelectField field="ruralurbanindicator" selected="True" />
+            <SelectField field="lmiindicator" selected="True" />
+            <SelectField field="minority" selected="True" />
+            <SelectField field="currentapprovalamount" selected="True" type="Float" size="4" />
+            <SelectField field="jobsreported" selected="True" type="Int64" size="8" />
+            <SelectField field="forgivenessamount" selected="True" type="Float" size="4" />
+            <SelectField field="Fintech Partnership " selected="True" rename="FintechPartnership" type="V_String" size="1073741823" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="55">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Unique.Unique">
+        <Position x="1518" y="246" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UniqueFields>
+            <Field field="loannumber" />
+          </UniqueFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText><![CDATA[Validate that there are no duplicates in the newly combined data ]]></AnnotationText>
+          <DefaultAnnotationText><![CDATA[Validate that there are no duplicates in the newly combined data ]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnique" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="29" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="32" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Estimation" />
+      <Destination ToolID="27" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Validation" />
+      <Destination ToolID="28" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="24" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="25" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="14" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="25" Connection="Output" />
+      <Destination ToolID="14" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Join" />
+      <Destination ToolID="18" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="18" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Join" />
+      <Destination ToolID="26" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="13" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="17" Connection="Output" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Join" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Join" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="23" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="34" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="23" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="53" Connection="Unique" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="24" Connection="Output" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="26" Connection="Output" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="29" Connection="Output" />
+      <Destination ToolID="33" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="30" Connection="Join" />
+      <Destination ToolID="55" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="32" Connection="Output" />
+      <Destination ToolID="30" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="33" Connection="Unique" />
+      <Destination ToolID="30" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="33" Connection="Unique" />
+      <Destination ToolID="31" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="36" Connection="True" />
+      <Destination ToolID="38" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="40" Connection="False" />
+      <Destination ToolID="38" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="37" Connection="Output" />
+      <Destination ToolID="36" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="38" Connection="Join" />
+      <Destination ToolID="47" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="39" Connection="Output" />
+      <Destination ToolID="40" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="40" Connection="True" />
+      <Destination ToolID="43" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="41" Connection="True" />
+      <Destination ToolID="43" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="42" Connection="Output" />
+      <Destination ToolID="41" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="43" Connection="Join" />
+      <Destination ToolID="46" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="44" Connection="True" />
+      <Destination ToolID="51" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="45" Connection="True" />
+      <Destination ToolID="51" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="44" Connection="False" />
+      <Destination ToolID="54" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="46" Connection="Output" />
+      <Destination ToolID="44" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="47" Connection="Output" />
+      <Destination ToolID="45" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="48" Connection="Output" />
+      <Destination ToolID="39" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="51" Connection="Output" />
+      <Destination ToolID="52" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="52" Connection="Output" />
+      <Destination ToolID="53" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="54" Connection="Output" />
+      <Destination ToolID="49" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="55" Connection="Unique" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Community_Bank_Data_Commented</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="79608c22-f433-4622-b4ab-1a0e6e2fdcbe" />
+      <Telemetry>
+        <PreviousWorkflowId value="f24de35f-9694-45ee-9de6-df55384273f0" />
+        <OriginWorkflowId value="f87aa52c-fca2-4f53-bee0-15070f9de3a7" />
+      </Telemetry>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
